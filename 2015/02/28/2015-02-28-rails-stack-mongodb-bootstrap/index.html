@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Rails Stack - MongoDB, Bootstrap | Yuanhang&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="Rails Stack - MongoDBIntroductionThis is an introduction of creating rails stack together with MongoDB.The tech stack includes:  Rails MongoDB Bootstrap AngularJS Bower Capistrano Nginx RSpec  Create">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails Stack - MongoDB, Bootstrap">
+<meta property="og:url" content="https://yuanhang.io/2015/02/28/2015-02-28-rails-stack-mongodb-bootstrap/index.html">
+<meta property="og:site_name" content="Yuanhang&#39;s Blog">
+<meta property="og:description" content="Rails Stack - MongoDBIntroductionThis is an introduction of creating rails stack together with MongoDB.The tech stack includes:  Rails MongoDB Bootstrap AngularJS Bower Capistrano Nginx RSpec  Create">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-06T11:34:02.872Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rails Stack - MongoDB, Bootstrap">
+<meta name="twitter:description" content="Rails Stack - MongoDBIntroductionThis is an introduction of creating rails stack together with MongoDB.The tech stack includes:  Rails MongoDB Bootstrap AngularJS Bower Capistrano Nginx RSpec  Create">
+    
+        <link rel="alternate" type="application/atom+xml" title="Yuanhang&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Yuanhang Guo</h5>
+          <a href="mailto:yuanhang.guo@gmail.com" title="yuanhang.guo@gmail.com" class="mail">yuanhang.guo@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yuanhang" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Rails Stack - MongoDB, Bootstrap</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Rails Stack - MongoDB, Bootstrap</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-02-28T05:15:00.000Z" itemprop="datePublished" class="page-time">
+  2015-02-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Rails-Stack-MongoDB"><span class="post-toc-text">Rails Stack - MongoDB</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Introduction"><span class="post-toc-text">Introduction</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Create-a-rails-application"><span class="post-toc-text">Create a rails application</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Setup-Bower"><span class="post-toc-text">Setup Bower</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-Bower"><span class="post-toc-text">Install Bower</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Use-Bower-in-Rails"><span class="post-toc-text">Use Bower in Rails</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Use-Bootstrap"><span class="post-toc-text">Use Bootstrap</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-Bootstrap-via-Bower"><span class="post-toc-text">Install Bootstrap via Bower</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Use-Bootstrap-in-rails"><span class="post-toc-text">Use Bootstrap in rails</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fix-bootstrap-fonts-missing-issue"><span class="post-toc-text">Fix bootstrap fonts missing issue</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Verify-that-Bootstrap-works-in-Development"><span class="post-toc-text">Verify that Bootstrap works in Development</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Verify-Bootstrap-works-in-production-mode"><span class="post-toc-text">Verify Bootstrap works in production mode</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Use-MongoDB"><span class="post-toc-text">Use MongoDB</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Create-Controller"><span class="post-toc-text">Create Controller</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Setup-to-use-Bootstrap-theme"><span class="post-toc-text">Setup to use Bootstrap theme</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2015-02-28-rails-stack-mongodb-bootstrap" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Rails Stack - MongoDB, Bootstrap</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-02-28 13:15:00" datetime="2015-02-28T05:15:00.000Z" itemprop="datePublished">2015-02-28</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Rails-Stack-MongoDB"><a href="#Rails-Stack-MongoDB" class="headerlink" title="Rails Stack - MongoDB"></a>Rails Stack - MongoDB</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>This is an introduction of creating rails stack together with MongoDB.<br>The tech stack includes:</p>
+<ul>
+<li>Rails</li>
+<li>MongoDB</li>
+<li>Bootstrap</li>
+<li>AngularJS</li>
+<li>Bower</li>
+<li>Capistrano</li>
+<li>Nginx</li>
+<li>RSpec</li>
+</ul>
+<h2 id="Create-a-rails-application"><a href="#Create-a-rails-application" class="headerlink" title="Create a rails application"></a>Create a rails application</h2><p>It seems that <code>TurboLinks</code> does not play well with <code>AngularJS</code>. So we will not enable <code>TurboLinks</code> when we create the rails application.<br>Since we will use <code>RSpec</code>, here we skip the <code>test-unit</code> too (<code>-T</code>).</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails new -T --skip-turbolinks rails-stack-mongo</span><br></pre></td></tr></table></figure>
+<p>You might want to add <code>config/secrets.yml</code> and <code>config/database.yml</code> into <code>.gitignore</code> to avoid expose them.</p>
+<p>If you’ve already checked in those two files and want to remove them. Try the following:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm config/secrets.yml config/database.yml</span><br></pre></td></tr></table></figure>
+<h2 id="Setup-Bower"><a href="#Setup-Bower" class="headerlink" title="Setup Bower"></a>Setup Bower</h2><p>We will use <code>bower</code> to manage the front-end libraries, including <code>bootstrap</code>. So here we need to setup <code>bower</code> first.</p>
+<h3 id="Install-Bower"><a href="#Install-Bower" class="headerlink" title="Install Bower"></a>Install Bower</h3><p>OS X:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g bower</span><br></pre></td></tr></table></figure>
+<p>Ubuntu:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nodejs npm</span><br><span class="line">sudo npm install -g bower</span><br><span class="line">sudo ln -s /usr/bin/nodejs /usr/bin/node</span><br></pre></td></tr></table></figure>
+<p>In case the <code>git://</code> protocol is not working in your network, you can let git to replace <code>git://</code> with <code>https://</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global url.<span class="string">"https://"</span>.insteadOf git://</span><br></pre></td></tr></table></figure>
+<h3 id="Use-Bower-in-Rails"><a href="#Use-Bower-in-Rails" class="headerlink" title="Use Bower in Rails"></a>Use Bower in Rails</h3><p>We will use <code>bower-rails</code> to mange <code>bower</code> related actions. The main reason we use this gem instead of using <code>bower</code> directly is that, this gem provides a helper task <code>rake bower:resolve</code> to deal with the assets path problem in rails. For example in rails, we might found that the <code>Glyphicons</code> work well in development, but will raise <code>404 - not found</code> on production. By using <code>bower-rails</code> gem, we can handle such situation easily.</p>
+<p>To use this gem, we need to add it into our <code>Gemfile</code>. </p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'bower-rails'</span>, <span class="string">'~&gt; 0.9.2'</span></span><br></pre></td></tr></table></figure>
+<p>Run <code>bundle install</code>.<br>Then run </p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g <span class="symbol">bower_rails:</span>initialize</span><br></pre></td></tr></table></figure>
+<p>This will add <code>Bowerfile</code> and <code>initializers/bower_rails.rb</code>.</p>
+<p>The <code>Bowerfile</code> is just like a <code>Gemfile</code>, but for <code>bower</code>. It uses an DSL developed to provide similar feel like using bundler. </p>
+<p>You might also want to modify you <code>.gitignore</code> to exclude the libraries managed by bower from your source control.<br>Here is a sample <code>.gitignore</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># See https://help.github.com/articles/ignoring-files for more about ignoring files.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># If you find yourself ignoring temporary files generated by your text editor</span></span><br><span class="line"><span class="comment"># or operating system, you probably want to add a global ignore instead:</span></span><br><span class="line"><span class="comment">#   git config --global core.excludesfile '~/.gitignore_global'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Ignore bundler config.</span></span><br><span class="line">/.bundle</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ignore the default SQLite database.</span></span><br><span class="line">/db/*.sqlite3</span><br><span class="line">/db/*.sqlite3-journal</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ignore all logfiles and tempfiles.</span></span><br><span class="line">/<span class="built_in">log</span>/*</span><br><span class="line">!/<span class="built_in">log</span>/.keep</span><br><span class="line">/tmp</span><br><span class="line"></span><br><span class="line"><span class="comment">### Rails template</span></span><br><span class="line">*.rbc</span><br><span class="line">capybara-*.html</span><br><span class="line">.rspec</span><br><span class="line">/<span class="built_in">log</span></span><br><span class="line">/tmp</span><br><span class="line">/db/*.sqlite3</span><br><span class="line">/db/*.sqlite3-journal</span><br><span class="line">/public/system</span><br><span class="line">/coverage/</span><br><span class="line">/spec/tmp</span><br><span class="line">**.orig</span><br><span class="line">rerun.txt</span><br><span class="line">pickle-email-*.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># TODO Comment out these rules if you are OK with secrets being uploaded to the repo</span></span><br><span class="line">config/initializers/secret_token.rb</span><br><span class="line">config/secrets.yml</span><br><span class="line"></span><br><span class="line"><span class="comment">## Environment normalisation:</span></span><br><span class="line">/.bundle</span><br><span class="line">/vendor/bundle</span><br><span class="line"></span><br><span class="line"><span class="comment"># these should all be checked in to normalise the environment:</span></span><br><span class="line"><span class="comment"># Gemfile.lock, .ruby-version, .ruby-gemset</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># unless supporting rvm &lt; 1.11.0 or doing something fancy, ignore this:</span></span><br><span class="line">.rvmrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># if using bower-rails ignore default bower_components path bower.json files</span></span><br><span class="line">/vendor/assets/bower_components</span><br><span class="line">*.bowerrc</span><br><span class="line">bower.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### SVN template</span></span><br><span class="line">.svn/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### Windows template</span></span><br><span class="line"><span class="comment"># Windows image file caches</span></span><br><span class="line">Thumbs.db</span><br><span class="line">ehthumbs.db</span><br><span class="line"></span><br><span class="line"><span class="comment"># Folder config file</span></span><br><span class="line">Desktop.ini</span><br><span class="line"></span><br><span class="line"><span class="comment"># Recycle Bin used on file shares</span></span><br><span class="line"><span class="variable">$RECYCLE</span>.BIN/</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows Installer files</span></span><br><span class="line">*.cab</span><br><span class="line">*.msi</span><br><span class="line">*.msm</span><br><span class="line">*.msp</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows shortcuts</span></span><br><span class="line">*.lnk</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### JetBrains template</span></span><br><span class="line"><span class="comment"># Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm</span></span><br><span class="line"></span><br><span class="line">*.iml</span><br><span class="line"></span><br><span class="line"><span class="comment">## Directory-based project format:</span></span><br><span class="line">.idea/</span><br><span class="line"><span class="comment"># if you remove the above rule, at least ignore the following:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># User-specific stuff:</span></span><br><span class="line"><span class="comment"># .idea/workspace.xml</span></span><br><span class="line"><span class="comment"># .idea/tasks.xml</span></span><br><span class="line"><span class="comment"># .idea/dictionaries</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Sensitive or high-churn files:</span></span><br><span class="line"><span class="comment"># .idea/dataSources.ids</span></span><br><span class="line"><span class="comment"># .idea/dataSources.xml</span></span><br><span class="line"><span class="comment"># .idea/sqlDataSources.xml</span></span><br><span class="line"><span class="comment"># .idea/dynamic.xml</span></span><br><span class="line"><span class="comment"># .idea/uiDesigner.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Gradle:</span></span><br><span class="line"><span class="comment"># .idea/gradle.xml</span></span><br><span class="line"><span class="comment"># .idea/libraries</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Mongo Explorer plugin:</span></span><br><span class="line"><span class="comment"># .idea/mongoSettings.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## File-based project format:</span></span><br><span class="line">*.ipr</span><br><span class="line">*.iws</span><br><span class="line"></span><br><span class="line"><span class="comment">## Plugin-specific files:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># IntelliJ</span></span><br><span class="line">out/</span><br><span class="line"></span><br><span class="line"><span class="comment"># mpeltonen/sbt-idea plugin</span></span><br><span class="line">.idea_modules/</span><br><span class="line"></span><br><span class="line"><span class="comment"># JIRA plugin</span></span><br><span class="line">atlassian-ide-plugin.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># Crashlytics plugin (for Android Studio and IntelliJ)</span></span><br><span class="line">com_crashlytics_export_strings.xml</span><br><span class="line">crashlytics.properties</span><br><span class="line">crashlytics-build.properties</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### OSX template</span></span><br><span class="line">.DS_Store</span><br><span class="line">.AppleDouble</span><br><span class="line">.LSOverride</span><br><span class="line"></span><br><span class="line"><span class="comment"># Icon must end with two \r</span></span><br><span class="line">Icon</span><br><span class="line"></span><br><span class="line"><span class="comment"># Thumbnails</span></span><br><span class="line">._*</span><br><span class="line"></span><br><span class="line"><span class="comment"># Files that might appear on external disk</span></span><br><span class="line">.Spotlight-V100</span><br><span class="line">.Trashes</span><br><span class="line"></span><br><span class="line"><span class="comment"># Directories potentially created on remote AFP share</span></span><br><span class="line">.AppleDB</span><br><span class="line">.AppleDesktop</span><br><span class="line">Network Trash Folder</span><br><span class="line">Temporary Items</span><br><span class="line">.apdisk</span><br></pre></td></tr></table></figure>
+<h2 id="Use-Bootstrap"><a href="#Use-Bootstrap" class="headerlink" title="Use Bootstrap"></a>Use Bootstrap</h2><h3 id="Install-Bootstrap-via-Bower"><a href="#Install-Bootstrap-via-Bower" class="headerlink" title="Install Bootstrap via Bower"></a>Install Bootstrap via Bower</h3><p>Edit <code>Bowerfile</code>, add</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">asset <span class="string">'bootstrap'</span></span><br></pre></td></tr></table></figure>
+<p>Then run </p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="symbol">bower:</span>install</span><br></pre></td></tr></table></figure>
+<p>to install <code>bootstrap</code>.</p>
+<h3 id="Use-Bootstrap-in-rails"><a href="#Use-Bootstrap-in-rails" class="headerlink" title="Use Bootstrap in rails"></a>Use Bootstrap in rails</h3><p>Edit <code>config/application.rb</code> to add <code>bower_components</code> into asset pipeline.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config.assets.paths &lt;&lt; Rails.root.join(<span class="string">'vendor'</span>, <span class="string">'assets'</span>, <span class="string">'bower_components'</span>)</span><br><span class="line"><span class="comment"># config.assets.paths &lt;&lt; Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap', 'dist', 'fonts')</span></span><br><span class="line">config.assets.precompile &lt;&lt; <span class="regexp">%r(.*.(?:eot|svg|ttf|woff|woff2)</span>$)</span><br></pre></td></tr></table></figure>
+<p>Edit <code>app/assets/javascripts/application.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//= require bootstrap/dist/js/bootstrap</span></span><br></pre></td></tr></table></figure>
+<p>Edit <code>app/assets/stylesheets/application.css</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*= require bootstrap/dist/css/bootstrap</span><br></pre></td></tr></table></figure>
+<h3 id="Fix-bootstrap-fonts-missing-issue"><a href="#Fix-bootstrap-fonts-missing-issue" class="headerlink" title="Fix bootstrap fonts missing issue"></a>Fix bootstrap fonts missing issue</h3><p>Edit <code>config/initializers/bower_rails.rb</code>, set <code>bower_rails.resolve_before_precompile = true</code>. This will run <code>rake bower:resolve</code> before compile. It will replace the <code>url()</code> in the css with <code>&lt;%= asset_path() %&gt;</code> helper. </p>
+<h3 id="Verify-that-Bootstrap-works-in-Development"><a href="#Verify-that-Bootstrap-works-in-Development" class="headerlink" title="Verify that Bootstrap works in Development"></a>Verify that Bootstrap works in Development</h3><p>First we need to add a verification page.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g controller page index</span><br></pre></td></tr></table></figure>
+<p>Edit <code>apps/views/page/index.html.erb</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">aria-label</span>=<span class="string">"Left Align"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-align-left"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-default btn-lg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-star"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span> Star</span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Single button --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"btn-group"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-default dropdown-toggle"</span> <span class="attr">data-toggle</span>=<span class="string">"dropdown"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    Action <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"caret"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"dropdown-menu"</span> <span class="attr">role</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Action<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Another action<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Something else here<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"divider"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Separated link<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Standard button --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span>&gt;</span>Default<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Provides extra visual weight and identifies the primary action in a set of buttons --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span>&gt;</span>Primary<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Indicates a successful or positive action --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-success"</span>&gt;</span>Success<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Contextual button for informational alert messages --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-info"</span>&gt;</span>Info<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Indicates caution should be taken with this action --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-warning"</span>&gt;</span>Warning<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Indicates a dangerous or potentially negative action --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-danger"</span>&gt;</span>Danger<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Deemphasize a button by making it look like a link while maintaining button behavior --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn btn-link"</span>&gt;</span>Link<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Start rails in development mode:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails s</span><br></pre></td></tr></table></figure>
+<p>Access <code>http://localhost:3000/page/index</code> to make sure that Bootstrap works well in <strong>development</strong> mode.</p>
+<h3 id="Verify-Bootstrap-works-in-production-mode"><a href="#Verify-Bootstrap-works-in-production-mode" class="headerlink" title="Verify Bootstrap works in production mode"></a>Verify Bootstrap works in production mode</h3><p>Edit <code>config/secrets.yml</code> to generate secret_key_base which is required to start WEBrick in produciton mode.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rake secret</span><br></pre></td></tr></table></figure>
+<p>Precompile assets from production</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RAILS_ENV=production rake <span class="symbol">assets:</span>clobber</span><br><span class="line">RAILS_ENV=production rake <span class="symbol">assets:</span>clean</span><br><span class="line">RAILS_ENV=production rake <span class="symbol">assets:</span>precompile</span><br></pre></td></tr></table></figure>
+<p>Start WEBrick in production mode</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RAILS_SERVE_STATIC_FILES=<span class="literal">true</span> rails s -e production</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: <code>RAILS_SERVE_STATIC_FILES=true</code> is added here because by default static files like *.css will not beserved by WEBrick in produciton mode. Check <code>config.serve_static_files</code> in  <code>config/environments/production.rb</code> for more details.</p>
+</blockquote>
+<p>Access <code>http://localhost:3000/page/index</code> to make sure that Bootstrap works well in <strong>production</strong> mode.</p>
+<h2 id="Use-MongoDB"><a href="#Use-MongoDB" class="headerlink" title="Use MongoDB"></a>Use MongoDB</h2><p>Use <code>Mongoid</code> as ORM driver. Edit <code>Gemfile</code>,</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem <span class="string">'mongoid'</span>, <span class="string">'~&gt; 4.0.0'</span></span><br></pre></td></tr></table></figure>
+<p>Then run <code>bundle install</code>.</p>
+<p>Create <code>mongoid.yml</code>.</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g <span class="symbol">mongoid:</span>config</span><br></pre></td></tr></table></figure>
+<h2 id="Create-Controller"><a href="#Create-Controller" class="headerlink" title="Create Controller"></a>Create Controller</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g scaffold Task <span class="symbol">name:</span>string <span class="symbol">description:</span>text <span class="symbol">status:</span>string</span><br></pre></td></tr></table></figure>
+<p>Restart your WEBrick server.</p>
+<h2 id="Setup-to-use-Bootstrap-theme"><a href="#Setup-to-use-Bootstrap-theme" class="headerlink" title="Setup to use Bootstrap theme"></a>Setup to use Bootstrap theme</h2><p>Checkout <a href="http://getbootstrap.com/getting-started/" target="_blank" rel="noopener">Bootstrap’s sample</a> to setup the basic theme.</p>
+<p>Edit <code>app/views/layouts/application.html.erb</code>,</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"author"</span> <span class="attr">content</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Rivendell<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">stylesheet_link_tag</span> '<span class="attr">application</span>', <span class="attr">media:</span> '<span class="attr">all</span>' %&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">csrf_meta_tags</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"navbar navbar-default"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"navbar-header"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"navbar-toggle collapsed"</span> <span class="attr">data-toggle</span>=<span class="string">"collapse"</span> <span class="attr">data-target</span>=<span class="string">"#navbar"</span> <span class="attr">aria-expanded</span>=<span class="string">"false"</span> <span class="attr">aria-controls</span>=<span class="string">"navbar"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"sr-only"</span>&gt;</span>Toggle navigation<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon-bar"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon-bar"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon-bar"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"navbar-brand"</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Rivendell<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"navbar"</span> <span class="attr">class</span>=<span class="string">"collapse navbar-collapse"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav navbar-nav"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"active"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">link_to</span>('<span class="attr">Home</span>', <span class="attr">root_path</span>) %&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">link_to</span>('<span class="attr">Tasks</span>', <span class="attr">tasks_path</span>) %&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--/.nav-collapse --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%=</span> <span class="attr">yield</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- /.container --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">javascript_include_tag</span> '<span class="attr">application</span>' %&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: <code>&lt;%= javascript_include_tag &#39;application&#39; %&gt;</code> is put at the bottom to speed up the page loading.</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-06T11:34:02.872Z" itemprop="dateUpdated">2019-04-06 19:34:02</time>
+</span><br>
+
+
+        
+        <a href="/2015/02/28/2015-02-28-rails-stack-mongodb-bootstrap/" target="_blank" rel="external">https://yuanhang.io/2015/02/28/2015-02-28-rails-stack-mongodb-bootstrap/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://yuanhang.io">
+            <img src="/img/avatar.jpg" alt="Yuanhang Guo">
+            Yuanhang Guo
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/04/06/hello-world/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2014/10/08/2014-10-08-an-idea-about-designing-a-flexible-system/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">An idea about designing a flexible system</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Yuanhang Guo &copy; 2013 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Yuanhang's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Yuanhang's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

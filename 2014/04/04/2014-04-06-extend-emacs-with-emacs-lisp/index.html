@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Extend Emacs with Emacs Lisp | Yuanhang&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="#Extend Emacs with Emacs Lisp ##Start with an requirementI’ve heard a lot about the magic about Emacs. As a programmer, I’d very like to learn Emacs this way cause that feels natural for me. And I fee">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Extend Emacs with Emacs Lisp">
+<meta property="og:url" content="https://yuanhang.io/2014/04/04/2014-04-06-extend-emacs-with-emacs-lisp/index.html">
+<meta property="og:site_name" content="Yuanhang&#39;s Blog">
+<meta property="og:description" content="#Extend Emacs with Emacs Lisp ##Start with an requirementI’ve heard a lot about the magic about Emacs. As a programmer, I’d very like to learn Emacs this way cause that feels natural for me. And I fee">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-06T11:34:02.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Extend Emacs with Emacs Lisp">
+<meta name="twitter:description" content="#Extend Emacs with Emacs Lisp ##Start with an requirementI’ve heard a lot about the magic about Emacs. As a programmer, I’d very like to learn Emacs this way cause that feels natural for me. And I fee">
+    
+        <link rel="alternate" type="application/atom+xml" title="Yuanhang&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Yuanhang Guo</h5>
+          <a href="mailto:yuanhang.guo@gmail.com" title="yuanhang.guo@gmail.com" class="mail">yuanhang.guo@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yuanhang" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Extend Emacs with Emacs Lisp</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Extend Emacs with Emacs Lisp</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2014-04-03T22:00:00.000Z" itemprop="datePublished" class="page-time">
+  2014-04-04
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#References"><span class="post-toc-text">References</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2014-04-06-extend-emacs-with-emacs-lisp" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Extend Emacs with Emacs Lisp</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2014-04-04 06:00:00" datetime="2014-04-03T22:00:00.000Z" itemprop="datePublished">2014-04-04</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>#Extend Emacs with Emacs Lisp</p>
+<p>##Start with an requirement<br>I’ve heard a lot about the <em>magic</em> about Emacs. As a programmer, I’d very like to learn Emacs this way cause that feels natural for me. And I feel excited about the idea that I can make what I need for me.</p>
+<p>##Start with a requirement<br>I’m new to Emacs. And currently I’m facing a requirement of <em>rename the current buffer and the corresponding file</em>. I didn’t how to do that so I googled for <a href="http://stackoverflow.com/questions/384284/how-do-i-rename-an-open-file-in-emacs" target="_blank" rel="noopener">answer</a>, and found a solution from <a href="http://stackoverflow.com/users/17221/matt-curtis" target="_blank" rel="noopener">Matt Curtis</a>. It’s a piece of Emacs Lisp code.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file</span><br><span class="line">(defun rename-file-and-buffer (new-name)</span><br><span class="line">  &quot;Renames both current buffer and file it&apos;s visiting to NEW-NAME.&quot;</span><br><span class="line">  (interactive &quot;sNew name: &quot;)</span><br><span class="line">  (let ((name (buffer-name))</span><br><span class="line">        (filename (buffer-file-name)))</span><br><span class="line">    (if (not filename)</span><br><span class="line">        (message &quot;Buffer &apos;%s&apos; is not visiting a file!&quot; name)</span><br><span class="line">      (if (get-buffer new-name)</span><br><span class="line">          (message &quot;A buffer named &apos;%s&apos; already exists!&quot; new-name)</span><br><span class="line">        (progn</span><br><span class="line">          (rename-file name new-name 1)</span><br><span class="line">          (rename-buffer new-name)</span><br><span class="line">          (set-visited-file-name new-name)</span><br><span class="line">          (set-buffer-modified-p nil))))))</span><br></pre></td></tr></table></figure>
+<p>##How to extend Emacs<br>The first problem I need to resolve is <em>how to get this code working with my Emacs</em>.</p>
+<ol>
+<li>Create a <code>.emacs</code> file under your home folder. That is where you put your customization.</li>
+<li>Restart Emacs.</li>
+<li><code>M-x rename-file-and-buffer</code>, <code>enter</code>.</li>
+<li>Input the new name. Then <code>enter</code>.</li>
+</ol>
+<p>#</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li><a href="http://jeremy.zawodny.com/emacs/emacs-4.html" target="_blank" rel="noopener">Emacs Beginner’s HOWTO: Customizing Emacs</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-06T11:34:02.870Z" itemprop="dateUpdated">2019-04-06 19:34:02</time>
+</span><br>
+
+
+        
+        <a href="/2014/04/04/2014-04-06-extend-emacs-with-emacs-lisp/" target="_blank" rel="external">https://yuanhang.io/2014/04/04/2014-04-06-extend-emacs-with-emacs-lisp/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://yuanhang.io">
+            <img src="/img/avatar.jpg" alt="Yuanhang Guo">
+            Yuanhang Guo
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2014/10/08/2014-10-08-an-idea-about-designing-a-flexible-system/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">An idea about designing a flexible system</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2014/04/03/2014-04-03-emacs-again/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Emacs again</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Yuanhang Guo &copy; 2013 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Yuanhang's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Yuanhang's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
