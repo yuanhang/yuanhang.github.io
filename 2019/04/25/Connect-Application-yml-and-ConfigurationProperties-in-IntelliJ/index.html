@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-137831225-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Connect-Application.yml-and-@ConfigurationProperties-in-IntelliJ | Yuanhang&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="kotlin,IntelliJ,Spring Boot">
+    <meta name="description" content="Connect Application.yml and @ConfigurationProperties in IntelliJSometimes IntelliJ complains about “cannot resolve configuration property ‘a.b.c’”. Here is how to solve it.Spring Boot provides details">
+<meta name="keywords" content="kotlin,IntelliJ,Spring Boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Connect-Application.yml-and-@ConfigurationProperties-in-IntelliJ">
+<meta property="og:url" content="https://yuanhang.io/2019/04/25/Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ/index.html">
+<meta property="og:site_name" content="Yuanhang&#39;s Blog">
+<meta property="og:description" content="Connect Application.yml and @ConfigurationProperties in IntelliJSometimes IntelliJ complains about “cannot resolve configuration property ‘a.b.c’”. Here is how to solve it.Spring Boot provides details">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-25T10:16:49.666Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Connect-Application.yml-and-@ConfigurationProperties-in-IntelliJ">
+<meta name="twitter:description" content="Connect Application.yml and @ConfigurationProperties in IntelliJSometimes IntelliJ complains about “cannot resolve configuration property ‘a.b.c’”. Here is how to solve it.Spring Boot provides details">
+    
+        <link rel="alternate" type="application/atom+xml" title="Yuanhang&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Yuanhang Guo</h5>
+          <a href="mailto:yuanhang.guo@gmail.com" title="yuanhang.guo@gmail.com" class="mail">yuanhang.guo@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yuanhang" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Connect-Application.yml-and-@ConfigurationProperties-in-IntelliJ</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Connect-Application.yml-and-@ConfigurationProperties-in-IntelliJ</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-25T10:15:57.000Z" itemprop="datePublished" class="page-time">
+  2019-04-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ"><span class="post-toc-text">Connect Application.yml and @ConfigurationProperties in IntelliJ</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Connect-Application.yml-and-@ConfigurationProperties-in-IntelliJ</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-25 18:15:57" datetime="2019-04-25T10:15:57.000Z" itemprop="datePublished">2019-04-25</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ"><a href="#Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ" class="headerlink" title="Connect Application.yml and @ConfigurationProperties in IntelliJ"></a>Connect Application.yml and @ConfigurationProperties in IntelliJ</h1><p>Sometimes IntelliJ complains about “cannot resolve configuration property ‘a.b.c’”. Here is how to solve it.<br>Spring Boot provides details of configuration properties via a file under <code>resources/META-INF/spring-configuration-metadata.json</code>. It looks like this (see <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html" target="_blank" rel="noopener">Appendix B. Configuration Metadata</a> for more details):<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"hints"</span>: [],</span><br><span class="line">  <span class="attr">"groups"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"sourceType"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"dummyLog"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"properties"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"sourceType"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"dummyLog.access-key-id"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"java.lang.String"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"sourceType"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"dummyLog.access-key-secret"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"java.lang.String"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>While we don’t want to maintain the config by hand, we can utilize a dependency to generate <code>spring-configuration-metadata.json</code> for us. It is <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor" target="_blank" rel="noopener"><code>spring-boot-configuration-processor</code></a>.</p>
+<p>For gradle,</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="comment">// To resolve properties in yml</span></span><br><span class="line">    <span class="comment">// To generate `spring-configuration-metadata.json`</span></span><br><span class="line">    kapt <span class="string">"org.springframework.boot:spring-boot-configuration-processor"</span></span><br><span class="line">    <span class="comment">// To add `spring-boot-configuration-processor` into classpath</span></span><br><span class="line">    implementation <span class="string">"org.springframework.boot:spring-boot-configuration-processor"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After add the dependency, just refresh gradle projects in your IntelliJ then you will find that the complain is gone. If not, try <code>Build - Rebuild Project</code> in your IntelliJ.</p>
+<p>If you are interested, <code>spring-boot-configuration-processor</code> will generate <code>spring-configuration-metadata.json</code> under <code>product-consumer/build/tmp/kapt3/classes/main/META-INF/</code>.</p>
+<p>References:</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-25T10:16:49.666Z" itemprop="dateUpdated">2019-04-25 18:16:49</time>
+</span><br>
+
+
+        
+        <a href="/2019/04/25/Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ/" target="_blank" rel="external">https://yuanhang.io/2019/04/25/Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://yuanhang.io">
+            <img src="/img/avatar.jpg" alt="Yuanhang Guo">
+            Yuanhang Guo
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/06/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Yuanhang Guo &copy; 2013 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Yuanhang's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Yuanhang's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

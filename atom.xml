@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yuanhang.io/"/>
-  <updated>2019-04-06T11:12:18.527Z</updated>
+  <updated>2019-04-25T10:16:49.666Z</updated>
   <id>https://yuanhang.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Connect-Application.yml-and-@ConfigurationProperties-in-IntelliJ</title>
+    <link href="https://yuanhang.io/2019/04/25/Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ/"/>
+    <id>https://yuanhang.io/2019/04/25/Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ/</id>
+    <published>2019-04-25T10:15:57.000Z</published>
+    <updated>2019-04-25T10:16:49.666Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ"><a href="#Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ" class="headerlink" title="Connect Application.yml and @ConfigurationProperties in IntelliJ"></a>Connect Application.yml and @ConfigurationProperties in IntelliJ</h1><p>Sometimes IntelliJ complains about “cannot resolve configuration property ‘a.b.c’”. Here is how to solve it.<br>Spring Boot provides details of configuration properties via a file under <code>resources/META-INF/spring-configuration-metadata.json</code>. It looks like this (see <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html" target="_blank" rel="noopener">Appendix B. Configuration Metadata</a> for more details):<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"hints"</span>: [],</span><br><span class="line">  <span class="attr">"groups"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"sourceType"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"dummyLog"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"properties"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"sourceType"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"dummyLog.access-key-id"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"java.lang.String"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"sourceType"</span>: <span class="string">"io.yuanhang.config.property.logProperties"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"dummyLog.access-key-secret"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"java.lang.String"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>While we don’t want to maintain the config by hand, we can utilize a dependency to generate <code>spring-configuration-metadata.json</code> for us. It is <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor" target="_blank" rel="noopener"><code>spring-boot-configuration-processor</code></a>.</p><p>For gradle,</p><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="comment">// To resolve properties in yml</span></span><br><span class="line">    <span class="comment">// To generate `spring-configuration-metadata.json`</span></span><br><span class="line">    kapt <span class="string">"org.springframework.boot:spring-boot-configuration-processor"</span></span><br><span class="line">    <span class="comment">// To add `spring-boot-configuration-processor` into classpath</span></span><br><span class="line">    implementation <span class="string">"org.springframework.boot:spring-boot-configuration-processor"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>After add the dependency, just refresh gradle projects in your IntelliJ then you will find that the complain is gone. If not, try <code>Build - Rebuild Project</code> in your IntelliJ.</p><p>If you are interested, <code>spring-boot-configuration-processor</code> will generate <code>spring-configuration-metadata.json</code> under <code>product-consumer/build/tmp/kapt3/classes/main/META-INF/</code>.</p><p>References:</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Connect-Application-yml-and-ConfigurationProperties-in-IntelliJ&quot;&gt;&lt;a href=&quot;#Connect-Application-yml-and-ConfigurationProperties-in-In
+      
+    
+    </summary>
+    
+    
+      <category term="kotlin" scheme="https://yuanhang.io/tags/kotlin/"/>
+    
+      <category term="IntelliJ" scheme="https://yuanhang.io/tags/IntelliJ/"/>
+    
+      <category term="Spring Boot" scheme="https://yuanhang.io/tags/Spring-Boot/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
@@ -39,8 +66,8 @@
   
   <entry>
     <title>Rails Stack - MongoDB, Bootstrap</title>
-    <link href="https://yuanhang.io/2015/02/28/2015-02-28-rails-stack-mongodb-bootstrap/"/>
-    <id>https://yuanhang.io/2015/02/28/2015-02-28-rails-stack-mongodb-bootstrap/</id>
+    <link href="https://yuanhang.io/2015/02/28/rails-stack-mongodb-bootstrap/"/>
+    <id>https://yuanhang.io/2015/02/28/rails-stack-mongodb-bootstrap/</id>
     <published>2015-02-28T05:15:00.000Z</published>
     <updated>2019-04-06T11:34:02.872Z</updated>
     
@@ -60,8 +87,8 @@
   
   <entry>
     <title>An idea about designing a flexible system</title>
-    <link href="https://yuanhang.io/2014/10/08/2014-10-08-an-idea-about-designing-a-flexible-system/"/>
-    <id>https://yuanhang.io/2014/10/08/2014-10-08-an-idea-about-designing-a-flexible-system/</id>
+    <link href="https://yuanhang.io/2014/10/08/an-idea-about-designing-a-flexible-system/"/>
+    <id>https://yuanhang.io/2014/10/08/an-idea-about-designing-a-flexible-system/</id>
     <published>2014-10-08T13:13:00.000Z</published>
     <updated>2019-04-06T11:34:02.871Z</updated>
     
@@ -82,8 +109,8 @@
   
   <entry>
     <title>Extend Emacs with Emacs Lisp</title>
-    <link href="https://yuanhang.io/2014/04/04/2014-04-06-extend-emacs-with-emacs-lisp/"/>
-    <id>https://yuanhang.io/2014/04/04/2014-04-06-extend-emacs-with-emacs-lisp/</id>
+    <link href="https://yuanhang.io/2014/04/04/extend-emacs-with-emacs-lisp/"/>
+    <id>https://yuanhang.io/2014/04/04/extend-emacs-with-emacs-lisp/</id>
     <published>2014-04-03T22:00:00.000Z</published>
     <updated>2019-04-06T11:34:02.870Z</updated>
     
@@ -104,8 +131,8 @@
   
   <entry>
     <title>Emacs again</title>
-    <link href="https://yuanhang.io/2014/04/03/2014-04-03-emacs-again/"/>
-    <id>https://yuanhang.io/2014/04/03/2014-04-03-emacs-again/</id>
+    <link href="https://yuanhang.io/2014/04/03/emacs-again/"/>
+    <id>https://yuanhang.io/2014/04/03/emacs-again/</id>
     <published>2014-04-03T14:33:00.000Z</published>
     <updated>2019-04-06T11:34:02.869Z</updated>
     
@@ -130,8 +157,8 @@
   
   <entry>
     <title>Blog on a new machine: using octopress and github pages</title>
-    <link href="https://yuanhang.io/2013/07/22/2013-07-22-blog-on-a-new-machine-using-octopress-and-github-pages/"/>
-    <id>https://yuanhang.io/2013/07/22/2013-07-22-blog-on-a-new-machine-using-octopress-and-github-pages/</id>
+    <link href="https://yuanhang.io/2013/07/22/blog-on-a-new-machine-using-octopress-and-github-pages/"/>
+    <id>https://yuanhang.io/2013/07/22/blog-on-a-new-machine-using-octopress-and-github-pages/</id>
     <published>2013-07-22T14:51:00.000Z</published>
     <updated>2019-04-06T11:34:02.867Z</updated>
     
@@ -153,8 +180,8 @@
   
   <entry>
     <title>A Programmer&#39;s way of blogging</title>
-    <link href="https://yuanhang.io/2013/03/17/2013-03-17-a-programmers-way-of-blogging/"/>
-    <id>https://yuanhang.io/2013/03/17/2013-03-17-a-programmers-way-of-blogging/</id>
+    <link href="https://yuanhang.io/2013/03/17/a-programmers-way-of-blogging/"/>
+    <id>https://yuanhang.io/2013/03/17/a-programmers-way-of-blogging/</id>
     <published>2013-03-17T10:10:00.000Z</published>
     <updated>2019-04-06T11:34:02.863Z</updated>
     
