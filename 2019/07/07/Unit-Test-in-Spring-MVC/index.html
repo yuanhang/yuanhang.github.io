@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-137831225-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Unit Test in Spring MVC | Yuanhang&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java,Spring MVC,Unit Test">
+    <meta name="description" content="Unit Test in Spring MVCMock为什么使用Mock，因为单元测试不是集成测试，应该集中在当前的逻辑，对于其他的依赖应该假定符合预期而不应该重复测试。但是隔离依赖需要大量的重复工作和设计上的支持，有些遗留代码没有很好的隔离依赖的设计支持但又需要测试。Mock技术就是为了解决这些问题。 Mock可以解决哪些问题？  verify: 对mock对象的行为进行控制 某个对象上的某个方">
+<meta name="keywords" content="java,Spring MVC,Unit Test">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unit Test in Spring MVC">
+<meta property="og:url" content="https://yuanhang.io/2019/07/07/Unit-Test-in-Spring-MVC/index.html">
+<meta property="og:site_name" content="Yuanhang&#39;s Blog">
+<meta property="og:description" content="Unit Test in Spring MVCMock为什么使用Mock，因为单元测试不是集成测试，应该集中在当前的逻辑，对于其他的依赖应该假定符合预期而不应该重复测试。但是隔离依赖需要大量的重复工作和设计上的支持，有些遗留代码没有很好的隔离依赖的设计支持但又需要测试。Mock技术就是为了解决这些问题。 Mock可以解决哪些问题？  verify: 对mock对象的行为进行控制 某个对象上的某个方">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-07-07T22:13:24.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unit Test in Spring MVC">
+<meta name="twitter:description" content="Unit Test in Spring MVCMock为什么使用Mock，因为单元测试不是集成测试，应该集中在当前的逻辑，对于其他的依赖应该假定符合预期而不应该重复测试。但是隔离依赖需要大量的重复工作和设计上的支持，有些遗留代码没有很好的隔离依赖的设计支持但又需要测试。Mock技术就是为了解决这些问题。 Mock可以解决哪些问题？  verify: 对mock对象的行为进行控制 某个对象上的某个方">
+    
+        <link rel="alternate" type="application/atom+xml" title="Yuanhang&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Yuanhang Guo</h5>
+          <a href="mailto:yuanhang.guo@gmail.com" title="yuanhang.guo@gmail.com" class="mail">yuanhang.guo@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yuanhang" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Unit Test in Spring MVC</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Unit Test in Spring MVC</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-07-07T10:12:28.000Z" itemprop="datePublished" class="page-time">
+  2019-07-07
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Unit-Test-in-Spring-MVC"><span class="post-toc-text">Unit Test in Spring MVC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mock"><span class="post-toc-text">Mock</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Junit-5-Spring-Boot-1-5-2-Mockito"><span class="post-toc-text">Junit 5, Spring Boot 1.5.2, Mockito</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dependencies"><span class="post-toc-text">Dependencies</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hello-World"><span class="post-toc-text">Hello World</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mock-in-Spring-MVC"><span class="post-toc-text">Mock in Spring MVC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Mock-AccountClient"><span class="post-toc-text">Mock AccountClient</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#单元测试的组织结构"><span class="post-toc-text">单元测试的组织结构</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FAQ"><span class="post-toc-text">FAQ</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#API路径存在却在测试时返回404"><span class="post-toc-text">API路径存在却在测试时返回404</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Share-Logic-in-tests-between-projects"><span class="post-toc-text">Share Logic in tests between projects</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Unit-Test-in-Spring-MVC" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Unit Test in Spring MVC</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-07-07 18:12:28" datetime="2019-07-07T10:12:28.000Z" itemprop="datePublished">2019-07-07</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Unit-Test-in-Spring-MVC"><a href="#Unit-Test-in-Spring-MVC" class="headerlink" title="Unit Test in Spring MVC"></a>Unit Test in Spring MVC</h1><h2 id="Mock"><a href="#Mock" class="headerlink" title="Mock"></a>Mock</h2><p>为什么使用Mock，因为单元测试不是集成测试，应该集中在当前的逻辑，对于其他的依赖应该假定符合预期而不应该重复测试。但是隔离依赖需要大量的重复工作和设计上的支持，有些遗留代码没有很好的隔离依赖的设计支持但又需要测试。Mock技术就是为了解决这些问题。</p>
+<p>Mock可以解决哪些问题？</p>
+<ul>
+<li>verify: 对mock对象的行为进行控制<ul>
+<li><strong>某个对象</strong>上的<strong>某个方法</strong>会被以<strong>某种参数</strong>调用<strong>预期的次数</strong></li>
+<li>mock对象（及方法）被调用的顺序，先调用A，再调用的B</li>
+<li>mock对象（及方法）从来没有被调用</li>
+</ul>
+</li>
+<li>stub: 对mock对象的行为进行控制<ul>
+<li><strong>某个对象</strong>上的<strong>某个方法</strong>以<strong>某种参数</strong>被调用时，会返回<strong>预期的结果</strong></li>
+<li>mock对象的某个方法，以同样的参数被调用，返回不同的结果</li>
+</ul>
+</li>
+<li>spy: 对真实对象（非mock）对象进行verify、stub（通常用于对于遗留代码的测试工作）。</li>
+</ul>
+<h2 id="Junit-5-Spring-Boot-1-5-2-Mockito"><a href="#Junit-5-Spring-Boot-1-5-2-Mockito" class="headerlink" title="Junit 5, Spring Boot 1.5.2, Mockito"></a>Junit 5, Spring Boot 1.5.2, Mockito</h2><h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><p>Add denpendencies in <code>build.gradle</code><br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">testCompile(<span class="string">'org.springframework.boot:spring-boot-starter-test'</span>)</span><br><span class="line">testCompile(<span class="string">'org.junit.jupiter:junit-jupiter-api:5.2.0'</span>)</span><br><span class="line">testRuntime(<span class="string">'org.junit.jupiter:junit-jupiter-engine:5.2.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// This is to use junit 5 with Spring 4.x (Spring Boot 1.x)</span></span><br><span class="line">testCompile(<span class="string">'com.github.sbrannen:spring-test-junit5:1.2.0'</span>)</span><br><span class="line"></span><br><span class="line">testCompile(<span class="string">'org.mockito:mockito-junit-jupiter:2.19.0'</span>)</span><br><span class="line">testCompile(<span class="string">'org.mockito:mockito-core:2.19.0'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> io.yuanhang.demo.controller</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Assertions.assertNotNull</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.BeforeAll</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.DisplayName</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.TestInstance</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.extension.ExtendWith</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.<span class="keyword">annotation</span>.Autowired</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit.jupiter.SpringExtension</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.<span class="keyword">get</span></span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.status</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.setup.MockMvcBuilders</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.WebApplicationContext</span><br><span class="line"></span><br><span class="line"><span class="meta">@ExtendWith(SpringExtension::class)</span></span><br><span class="line"><span class="meta">@TestInstance(TestInstance.Lifecycle.PER_CLASS)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CommonControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> wac: WebApplicationContext</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> mockMvc: MockMvc</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BeforeAll</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">setup</span><span class="params">()</span></span> &#123;</span><br><span class="line">        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@DisplayName(<span class="meta-string">"Wrong path should get 404"</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">incorrectPath</span><span class="params">()</span></span> &#123;</span><br><span class="line">        assertNotNull(mockMvc)</span><br><span class="line">        mockMvc.perform(<span class="keyword">get</span>(<span class="string">"/not-exist-path"</span>))</span><br><span class="line">            .andExpect(status().isNotFound)</span><br><span class="line">            .andExpect(forwardedUrl(<span class="literal">null</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@ExtendWith(SpringExtension::class)</code>是JUnit 5的新的设计，通过<code>ExtendWith</code>注解来扩展JUnit。</p>
+<p><code>SpringExtension</code>来自<code>com.github.sbrannen:spring-test-junit5:1.5.0</code>，是为JUnit5增加<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testcontext-framework" target="_blank" rel="noopener">Spring TestContext Framework</a>的支持，其中包括一个适用于Spring的Runner取代JUnit默认的Runner来跑测试。</p>
+<p><code>SpringBootTest</code>提供一些默认的行为</p>
+<h3 id="Mock-in-Spring-MVC"><a href="#Mock-in-Spring-MVC" class="headerlink" title="Mock in Spring MVC"></a>Mock in Spring MVC</h3><p>考虑如下设定：<br><code>AccountController</code>持有<code>AccountClient</code>的引用，正常情况下通过调用<code>AccountClient</code>上的方法完成请求。我们要测试的对象是<code>AccountController</code>。需要测是的内容包括：</p>
+<ul>
+<li>错误的签名会得到400的返回值</li>
+<li>正确但过期的签名会得到400的返回值</li>
+<li>正确且不过期的签名会得到正常的ResponseA</li>
+</ul>
+<p>因为要测试的对象是<code>AccountController</code>，所以我们应该假定<code>AccountClient</code>（外部依赖）的行为是没有问题的。为此需要Mock <code>AccountClient</code>，来控制其行为，以测试<code>AccountController</code>的行为。</p>
+<p>AccountController.kt<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(path = [<span class="meta-string">"/accounts"</span>], produces = [MediaType.APPLICATION_JSON_UTF8_VALUE])</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AccountController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> accountClient: AccountClient</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = [<span class="meta-string">"/"</span>], method = [RequestMethod.POST])</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">createSomething</span><span class="params">(<span class="meta">@RequestBody</span> signature: <span class="type">Signature</span>)</span></span>: SomeResponseA &#123;</span><br><span class="line">        <span class="keyword">if</span> (doSomeSignatureChecking(signature)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> CustomException(<span class="number">400</span>, <span class="string">"Wrong signature"</span>, <span class="string">"无效的签名"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> timeOffset = abs(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - signature.timestamp)</span><br><span class="line">        <span class="keyword">if</span> (timeOffset &gt; <span class="number">3600</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> CustomException(<span class="number">400</span>, <span class="string">"Signature expired"</span>, <span class="string">"签名已过期"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> accountClient.createSomething()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>AccountControllerTest.kt<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.yuanhang.demo.boot.controller.ExceptionControllerAdvice</span><br><span class="line"><span class="keyword">import</span> io.yuanhang.demo.core.utils.toJson</span><br><span class="line"><span class="keyword">import</span> io.yuanhang.demo.serviceA.feign.AccountClient</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Assertions.assertEquals</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.BeforeAll</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.DisplayName</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Nested</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.TestInstance</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.extension.ExtendWith</span><br><span class="line"><span class="keyword">import</span> org.mockito.InjectMocks</span><br><span class="line"><span class="keyword">import</span> org.mockito.Mock</span><br><span class="line"><span class="keyword">import</span> org.mockito.Mockito.`<span class="keyword">when</span>`</span><br><span class="line"><span class="keyword">import</span> org.mockito.Mockito.verifyZeroInteractions</span><br><span class="line"><span class="keyword">import</span> org.mockito.MockitoAnnotations</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.MediaType</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit.jupiter.SpringExtension</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.setup.MockMvcBuilders</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit</span><br><span class="line"></span><br><span class="line"><span class="meta">@ExtendWith(SpringExtension::class)</span></span><br><span class="line"><span class="meta">@TestInstance(TestInstance.Lifecycle.PER_CLASS)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@DisplayName(<span class="meta-string">"Account Test"</span>)</span></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> mockMvc: MockMvc</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mock</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> mockAccountClient: AccountClient</span><br><span class="line"></span><br><span class="line">    <span class="meta">@InjectMocks</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> accountController: AccountController</span><br><span class="line"></span><br><span class="line">    <span class="meta">@BeforeAll</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">setup</span><span class="params">()</span></span> &#123;</span><br><span class="line">        MockitoAnnotations.initMocks(<span class="keyword">this</span>)</span><br><span class="line">        mockMvc = MockMvcBuilders</span><br><span class="line">            .standaloneSetup(accountController)</span><br><span class="line">            .setControllerAdvice(ExceptionControllerAdvice())</span><br><span class="line">            .build()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nested</span></span><br><span class="line">    <span class="meta">@DisplayName(<span class="meta-string">"When Create Id"</span>)</span></span><br><span class="line">    <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">WhenCreatedId</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">val</span> path = <span class="string">"/accounts/"</span></span><br><span class="line"></span><br><span class="line">        <span class="meta">@Nested</span></span><br><span class="line">        <span class="meta">@DisplayName(<span class="meta-string">"When invalid signature"</span>)</span></span><br><span class="line">        <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">WhenWithInvalidSignature</span> </span>&#123;</span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(<span class="meta-string">"throws Wrong signature when wrong signature"</span>)</span></span><br><span class="line">            <span class="function"><span class="keyword">fun</span> <span class="title">throwsWrongSignature</span><span class="params">()</span></span> &#123;</span><br><span class="line">                <span class="keyword">val</span> invalidSignature = &#123;...&#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">val</span> resultActions = mockMvc.perform(</span><br><span class="line">                    MockMvcRequestBuilders.post(path)</span><br><span class="line">                        .contentType(MediaType.APPLICATION_JSON_UTF8)</span><br><span class="line">                        .content(invalidSignature.toJson()))</span><br><span class="line">                    .andExpect(MockMvcResultMatchers.status().isBadRequest)</span><br><span class="line">                <span class="keyword">val</span> response = resultActions.parseResponse&lt;SomeRessponseB&gt;()</span><br><span class="line">                assertEquals(<span class="string">"Wrong signature"</span>, response.message)</span><br><span class="line">                assertEquals(<span class="string">"无效的签名"</span>, response.userMessage)</span><br><span class="line">                verifyZeroInteractions(mockAccountClient)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(<span class="meta-string">"throws Signature expired when expired signature"</span>)</span></span><br><span class="line">            <span class="function"><span class="keyword">fun</span> <span class="title">throwsExpiredSignature</span><span class="params">()</span></span> &#123;</span><br><span class="line">                <span class="keyword">val</span> expiredSignature = &#123;...&#125;</span><br><span class="line">                <span class="keyword">val</span> resultActions = mockMvc.perform(</span><br><span class="line">                    MockMvcRequestBuilders.post(path)</span><br><span class="line">                        .contentType(MediaType.APPLICATION_JSON_UTF8)</span><br><span class="line">                        .content(expiredSignature.toJson()))</span><br><span class="line">                    .andExpect(MockMvcResultMatchers.status().isBadRequest)</span><br><span class="line">                <span class="keyword">val</span> response = resultActions.parseResponse&lt;SomeRessponseB&gt;()</span><br><span class="line">                assertEquals(<span class="string">"Signature expired"</span>, response.message)</span><br><span class="line">                assertEquals(<span class="string">"签名已过期"</span>, response.userMessage)</span><br><span class="line">                verifyZeroInteractions(mockAccountClient)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Nested</span></span><br><span class="line">		<span class="meta">@DisplayName(<span class="meta-string">"When valid signature"</span>)</span></span><br><span class="line">		<span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">WhenWithValidSignature</span> </span>&#123;</span><br><span class="line">			<span class="keyword">private</span> <span class="keyword">val</span> validSignature = &#123;...&#125;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Test</span></span><br><span class="line">			<span class="meta">@DisplayName(<span class="meta-string">"Request to create Id will be redirected to ServiceA"</span>)</span></span><br><span class="line">			<span class="function"><span class="keyword">fun</span> <span class="title">delegateToAccountClient</span><span class="params">()</span></span> &#123;</span><br><span class="line">				<span class="keyword">val</span> expected = &#123;...&#125;</span><br><span class="line">				`<span class="keyword">when</span>`(mockAccountClient.createSomething()).thenReturn(expected)</span><br><span class="line">				<span class="keyword">val</span> <span class="keyword">actual</span> = mockMvc.perform(</span><br><span class="line">					MockMvcRequestBuilders.post(path)</span><br><span class="line">						.contentType(MediaType.APPLICATION_JSON_UTF8)</span><br><span class="line">						.content(validSignature.toJson()))</span><br><span class="line">					.andExpect(MockMvcResultMatchers.status().isOk)</span><br><span class="line">					.parseResponse&lt;SomeResponseA&gt;()</span><br><span class="line">				assertEquals(expected, <span class="keyword">actual</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;<span class="keyword">reified</span> T&gt;</span> ResultActions.<span class="title">parseResponse</span><span class="params">()</span></span>: T &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.andReturn().response.contentAsString.parseJson()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Mock-AccountClient"><a href="#Mock-AccountClient" class="headerlink" title="Mock AccountClient"></a>Mock <code>AccountClient</code></h4><p>我们使用Mockito来完成Mock的部分。Mock <code>AccountClient</code>包括两个部分：<br>1、提供一个Mock <code>AccountClient</code><br>2、将其注入进入<code>AccountController</code><br>3、设定Mock <code>AccountClient</code>的行为（stub）</p>
+<p>使用<code>@Mock</code>注解可以完成Step 1。根据<a href="https://static.javadoc.io/org.mockito/mockito-core/2.28.2/org/mockito/Mockito.html#mock_annotation" target="_blank" rel="noopener">Mockito的文档</a>，需要使用<code>MockitoAnnotations.initMocks(this)</code>来初始化Mock。</p>
+<p>使用<code>@InjectMocks</code>注解标注<code>AccountController</code>，并指定<code>MockMvc</code>使用该<code>AccountController</code>，可以完成将Mock对象注入<code>AccountController</code>并进行测试的目的。为了处理<code>CustomException</code>，这里还设置<code>mockMvc</code>使用<code>ControllerAdvice</code>。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mockMvc = MockMvcBuilders</span><br><span class="line">            .standaloneSetup(accountController)</span><br><span class="line">            .setControllerAdvice(ExceptionControllerAdvice())</span><br><span class="line">            .build()</span><br></pre></td></tr></table></figure></p>
+<p>使用<code>when().thenReturn</code>, <code>verifyZeroInteractions()</code>来设定Mock的行为及做出验证。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">`<span class="keyword">when</span>`(mockAccountClient.createSomething()).thenReturn(expected)</span><br><span class="line"></span><br><span class="line">verifyZeroInteractions(mockAccountClient)</span><br></pre></td></tr></table></figure></p>
+<p>为了方便对MockMvc得到的response做验证，这里写了一个小的方法来帮助把ResultActions中Response的JSON string反序列化为Model。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;<span class="keyword">reified</span> T&gt;</span> ResultActions.<span class="title">parseResponse</span><span class="params">()</span></span>: T &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.andReturn().response.contentAsString.parseJson()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里要求API response中返回值的类型为<code>application/json</code>，可以通过在Controller中设定<code>@RequestMapping(path = [&quot;/accounts&quot;], produces = [MediaType.APPLICATION_JSON_UTF8_VALUE])</code>来完成。</p>
+<h4 id="单元测试的组织结构"><a href="#单元测试的组织结构" class="headerlink" title="单元测试的组织结构"></a>单元测试的组织结构</h4><p><a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested" target="_blank" rel="noopener">JUnit 5文档</a>中建议通过<code>@Nested</code>注解嵌套class来表达测试用例之间的关系。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ExtendWith(SpringExtension::class)</span></span><br><span class="line"><span class="meta">@TestInstance(TestInstance.Lifecycle.PER_CLASS)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@DisplayName(<span class="meta-string">"Account Test"</span>)</span></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Nested</span></span><br><span class="line">    <span class="meta">@DisplayName(<span class="meta-string">"When Create Id"</span>)</span></span><br><span class="line">    <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">WhenCreatedId</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Nested</span></span><br><span class="line">        <span class="meta">@DisplayName(<span class="meta-string">"When invalid signature"</span>)</span></span><br><span class="line">        <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">WhenWithInvalidSignature</span> </span>&#123;</span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(<span class="meta-string">"throws Wrong signature when wrong signature"</span>)</span></span><br><span class="line">            <span class="function"><span class="keyword">fun</span> <span class="title">throwsWrongSignature</span><span class="params">()</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(<span class="meta-string">"throws Signature expired when expired signature"</span>)</span></span><br><span class="line">            <span class="function"><span class="keyword">fun</span> <span class="title">throwsExpiredSignature</span><span class="params">()</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Nested</span></span><br><span class="line">        <span class="meta">@DisplayName(<span class="meta-string">"When valid signature"</span>)</span></span><br><span class="line">        <span class="keyword">inner</span> <span class="class"><span class="keyword">class</span> <span class="title">WhenWithValidSignature</span> </span>&#123;</span><br><span class="line">            <span class="meta">@Test</span></span><br><span class="line">            <span class="meta">@DisplayName(<span class="meta-string">"Request to create Id will be redirected to ServiceA"</span>)</span></span><br><span class="line">            <span class="function"><span class="keyword">fun</span> <span class="title">delegateToAccountClient</span><span class="params">()</span></span> &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="API路径存在却在测试时返回404"><a href="#API路径存在却在测试时返回404" class="headerlink" title="API路径存在却在测试时返回404"></a>API路径存在却在测试时返回404</h3><ol>
+<li>检查Spring启动的时候的<code>RequestMappingHandlerMapping</code>，<code>POST /accounts</code>和<code>POST /accounts/</code>是不同的。</li>
+<li>打开Spring的DEBUG Log来得到更多信息。<br>在<code>application.yml</code>中加入以下信息<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line"><span class="attr">  level:</span></span><br><span class="line">    <span class="string">org.springframework.web:</span> <span class="string">DEBUG</span></span><br><span class="line">    <span class="string">org.springframework.security:</span> <span class="string">DEBUG</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Share-Logic-in-tests-between-projects"><a href="#Share-Logic-in-tests-between-projects" class="headerlink" title="Share Logic in tests between projects"></a>Share Logic in tests between projects</h3><p>标准java工程分为两个部分，<code>main</code>和<code>test</code>。相应的，gradle提供了<code>compile</code>和<code>testCompile</code>两个target来处理依赖。如果我们想要在Project之间共享测试的逻辑，如<code>ResultActions.parseResponse()</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;<span class="keyword">reified</span> T&gt;</span> ResultActions.<span class="title">parseResponse</span><span class="params">()</span></span>: T &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.andReturn().response.contentAsString.parseJson()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么，就需要在gradle中指明测试的依赖<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile project(<span class="string">':project-contains-shared-logic-under-its-test-folder'</span>) <span class="comment">// for non-test dependency if needed</span></span><br><span class="line">testCompile project(<span class="string">':project-contains-shared-logic-under-its-test-folder'</span>).sourceSets.test.output</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-07-07T22:13:24.354Z" itemprop="dateUpdated">2019-07-08 06:13:24</time>
+</span><br>
+
+
+        
+        <a href="/2019/07/07/Unit-Test-in-Spring-MVC/" target="_blank" rel="external">https://yuanhang.io/2019/07/07/Unit-Test-in-Spring-MVC/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://yuanhang.io">
+            <img src="/img/avatar.jpg" alt="Yuanhang Guo">
+            Yuanhang Guo
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-MVC/">Spring MVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unit-Test/">Unit Test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/30/Spring-Boot-for-console-application/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring Boot for console application</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Yuanhang Guo &copy; 2013 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Yuanhang's Blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Yuanhang's Blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
